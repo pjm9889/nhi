@@ -1,0 +1,15 @@
+import urllib.request
+import json
+
+url='http://openapi.seoul.go.kr:8088/sample/json/SeoulPublicLibraryInfo/1/5/'
+
+plainText=urllib.request.urlopen(url).read().decode()
+jsonData=json.loads(plainText)
+libData=jsonData.get('SeoulPublicLibraryInfo').get('row')
+print(libData)
+
+
+import pandas as pd
+df = pd.DataFrame(libData)
+print(df)
+df.to_csv('서울시공공도서관.csv', encoding='utf-8', index=False)
